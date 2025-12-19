@@ -15,7 +15,7 @@ const features = [
   {
     icon: Award,
     title: 'Certificación Premium',
-    description: 'Títulos reconocidos por las empresas Fortune 500 y validados por blockchain.'
+    description: 'Títulos reconocidos por las empresas Fortune 500 y validados por la blockchain de Bitcoin.'
   },
   {
     icon: Zap,
