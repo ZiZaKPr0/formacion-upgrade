@@ -25,7 +25,7 @@ export const Hero: React.FC = () => {
             </h1>
             
             <p className="text-lg text-slate-600 max-w-lg leading-relaxed">
-              Formación Upgrade es la academia líder valorada en $100M+ por transformar profesionales en líderes del sector tecnológico y empresarial.
+              Especialistas en formación online para personas empreadas y desempleadas.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
