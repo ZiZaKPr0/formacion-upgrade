@@ -14,7 +14,7 @@ export const ContactForm: React.FC = () => {
   };
 
   return (
-    <section className="py-24 bg-white relative overflow-hidden">
+    <section id="contacto" className="py-24 bg-white relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-brand-600 rounded-3xl overflow-hidden shadow-2xl flex flex-col lg:flex-row">
           

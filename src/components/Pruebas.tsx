@@ -1,67 +1,128 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import DisplayCards from './ui/display-cards';
-import { Sparkles, BookOpen, Award } from 'lucide-react';
+import { Monitor, Globe, ShieldCheck } from 'lucide-react';
 
-const defaultCards = [
-  {
-    icon: <Sparkles className="size-4 text-blue-300" />,
-    title: "Featured",
-    description: "Discover amazing content",
-    date: "Just now",
-    iconClassName: "text-blue-500",
-    titleClassName: "text-blue-500",
-    className:
-      "[grid-area:stack] hover:-translate-y-10 before:absolute before:w-[100%] before:outline-1 before:rounded-xl before:outline-border before:h-[100%] before:content-[''] before:bg-blend-overlay before:bg-background/50 grayscale-[100%] hover:before:opacity-0 before:transition-opacity before:duration:700 hover:grayscale-0 before:left-0 before:top-0",
-  },
-  {
-    icon: <BookOpen className="size-4 text-orange-300" />,
-    title: "Popular",
-    description: "En tentencia",
-    date: "Hace 2 dias",
-    iconClassName: "text-orange-500",
-    titleClassName: "text-orange-500",
-    className:
-      "[grid-area:stack] translate-x-12 translate-y-10 hover:-translate-y-1 before:absolute before:w-[100%] before:outline-1 before:rounded-xl before:outline-border before:h-[100%] before:content-[''] before:bg-blend-overlay before:bg-background/50 grayscale-[100%] hover:before:opacity-0 before:transition-opacity before:duration:700 hover:grayscale-0 before:left-0 before:top-0",
-  },
-  {
-    icon: <Award className="size-4 text-purple-300" />,
-    title: "New",
-    description: "Latest updates and features",
-    date: "Today",
-    iconClassName: "text-purple-500",
-    titleClassName: "text-purple-500",
-    className:
-      "[grid-area:stack] translate-x-24 translate-y-20 hover:translate-y-10",
-  },
+// 1. LISTA DE SLUGS GARANTIZADOS (Probados y funcionando)
+const slugs = [
+  "openai",           // Inteligencia Artificial
+  "microsoftteams",   // Comunicación / Microsoft
+  "google",           // Ecosistema Google
+  "googlesheets",     // Ofimática / Excel
+  "zoom",             // Clases online
+  "skype",            // Idiomas / Videollamadas
+  "trello",           // Organización
+  "notion",           // Productividad
+  "googlechrome",     // Navegación
+  "canva",            // Diseño sencillo
+  "coursera",         // Educación
+  "udemy",            // Formación
+  "whatsapp",         // Comunicación
+  "visualstudiocode", // Tecnología
+  "spotify"           // Multimedia
 ];
 
-export const Pruebas: React.FC = () => {
-  return (
-    <section id="pruebas" className="py-24 bg-gradient-to-b from-slate-50 to-white relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute top-0 right-0 -mr-40 -mt-40 w-[600px] h-[600px] bg-brand-100/30 rounded-full blur-3xl opacity-50 z-0 pointer-events-none"></div>
-      <div className="absolute bottom-0 left-0 -ml-40 -mb-40 w-[500px] h-[500px] bg-blue-100/30 rounded-full blur-3xl opacity-50 z-0 pointer-events-none"></div>
+// Usamos el CDN de Simple Icons con un fallback por si acaso
+const iconImages = slugs.map(slug => `https://cdn.simpleicons.org/${slug}`);
 
+const IconCloudCustom = ({ images }) => (
+  <div className="relative flex h-full w-full items-center justify-center">
+    <div className="flex flex-wrap justify-center gap-4 max-w-[400px]">
+      {images.map((img, index) => (
+        <motion.div
+          key={index}
+          animate={{ 
+            y: [0, -10, 0], 
+            rotate: [0, index % 2 === 0 ? 5 : -5, 0],
+            opacity: [0.9, 1, 0.9] 
+          }}
+          transition={{
+            duration: 4 + Math.random() * 2,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: index * 0.2,
+          }}
+          className="bg-white p-3 rounded-xl shadow-md border border-slate-100 flex items-center justify-center"
+        >
+          <img 
+            src={img} 
+            alt="icon" 
+            className="size-8 object-contain" 
+            // Si la imagen falla, no mostramos el cuadro roto
+            onError={(e) => { e.currentTarget.parentElement.style.display = 'none'; }} 
+          />
+        </motion.div>
+      ))}
+    </div>
+  </div>
+);
+
+export const Pruebas: React.FC = () => {
+  const defaultCards = [
+    {
+      icon: <Monitor className="size-4 text-blue-500" />,
+      title: "Ofimática Profesional",
+      description: "Excel, Word y herramientas Microsoft.",
+      date: "Oficial",
+      className: "[grid-area:stack] hover:-translate-y-10 transition-all duration-500 bg-white border border-slate-100 shadow-sm",
+    },
+    {
+      icon: <Globe className="size-4 text-orange-500" />,
+      title: "Idiomas Online",
+      description: "Inglés profesional nivel A2-C1.",
+      date: "Directo",
+      className: "[grid-area:stack] translate-x-12 translate-y-10 hover:-translate-y-1 transition-all duration-500 bg-white border border-slate-100 shadow-sm",
+    },
+    {
+      icon: <ShieldCheck className="size-4 text-emerald-500" />,
+      title: "Licitaciones",
+      description: "Certificados para concursos públicos.",
+      date: "Válido",
+      className: "[grid-area:stack] translate-x-24 translate-y-20 hover:translate-y-10 transition-all duration-500 bg-white border border-slate-100 shadow-sm",
+    },
+  ];
+
+  return (
+    <section id="pruebas" className="py-24 bg-white relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-brand-600 font-bold tracking-wide uppercase text-sm mb-3">
-            Pruebas
+        
+        {/* TÍTULO CENTRADO */}
+        <div className="text-center max-w-3xl mx-auto mb-20">
+          <h2 className="text-orange-600 font-bold uppercase text-xs tracking-[0.2em] mb-4">
+            Metodología Interactiva
           </h2>
-          <h3 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-6">
-            Componentes Interactivos
+          <h3 className="text-4xl lg:text-5xl font-extrabold text-slate-900 mb-6 leading-tight">
+            Aprende con las mejores <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-orange-400">herramientas</span>
           </h3>
-          <p className="text-slate-600 text-lg">
-            Explora nuestros componentes de demostración con efectos visuales avanzados.
+          <p className="text-slate-600 text-lg leading-relaxed max-w-2xl mx-auto">
+            Integramos las tecnologías más punteras en nuestros programas para asegurar que tu formación esté a la vanguardia del mercado laboral.
           </p>
         </div>
 
-        <div className="flex min-h-[400px] w-full items-center justify-center py-20">
-          <div className="w-full max-w-3xl">
-            <DisplayCards cards={defaultCards} />
+        {/* GRID: Cards (Izq) y Nube (Der) */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          
+          {/* Lado Izquierdo: Cards */}
+          <div className="relative h-[400px] w-full flex items-center justify-center lg:justify-end">
+            <div className="w-full max-w-sm">
+              <DisplayCards cards={defaultCards} />
+            </div>
           </div>
+
+          {/* Lado Derecho: Nube */}
+          <div className="h-[450px] w-full flex items-center justify-center lg:justify-start">
+             <div className="w-full max-w-md bg-slate-50/80 rounded-3xl p-10 border border-slate-100 shadow-inner">
+                <h4 className="text-slate-400 text-xs font-bold uppercase tracking-widest mb-8 text-center lg:text-left">
+                  Ecosistema de Software
+                </h4>
+                <IconCloudCustom images={iconImages} />
+             </div>
+          </div>
+
         </div>
       </div>
     </section>
   );
 };
 
+export default Pruebas;

@@ -2,11 +2,9 @@ import React from 'react';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 import { Features } from './components/Features';
-import { Stats } from './components/Stats';
 import { Courses } from './components/Courses';
 import { ContactForm } from './components/ContactForm';
 import { Pruebas } from './components/Pruebas';
-import { PruebasHero } from './components/PruebasHero';
 import { Footer } from './components/Footer';
 
 const App: React.FC = () => {
@@ -15,11 +13,9 @@ const App: React.FC = () => {
       <Header />
       <main>
         <Hero />
-        <Stats />
         <Features />
         <Courses />
         <Pruebas />
-        <PruebasHero />
         <ContactForm />
       </main>
       <Footer />

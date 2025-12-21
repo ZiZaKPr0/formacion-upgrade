@@ -33,8 +33,13 @@ export const Header: React.FC = () => {
             <div className="w-10 h-10 bg-brand-500 rounded-lg flex items-center justify-center text-white font-bold text-xl mr-2 group-hover:rotate-12 transition-transform duration-300">
               UP
             </div>
-            <span className={`font-bold text-2xl tracking-tight ${isScrolled ? 'text-slate-900' : 'text-slate-900 lg:text-slate-900'}`}>
-              Formación<span className="text-brand-500">Upgrade</span>
+            <span className={`font-bold text-2xl tracking-tight 
+              ${isScrolled 
+                ? 'text-slate-900' 
+                : 'text-white'
+                }`}>
+              Formación
+              <span className="text-brand-500">Upgrade</span>
             </span>
           </div>
 
@@ -44,7 +49,11 @@ export const Header: React.FC = () => {
               <a
                 key={link.name}
                 href={link.href}
-                className="text-sm font-medium text-slate-600 hover:text-brand-600 transition-colors duration-200"
+                className={`text-sm font-medium transition-colors duration-200 ${
+                  isScrolled 
+                    ? 'text-slate-900 hover:text-brand-600' 
+                    : 'text-white hover:text-brand-600'
+                }`}
               >
                 {link.name}
               </a>
@@ -61,7 +70,9 @@ export const Header: React.FC = () => {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-slate-700"
+            className={`md:hidden transition-colors duration-200 ${
+              isScrolled ? 'text-slate-700' : 'text-white'
+            }`}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
