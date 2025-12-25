@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { Send, CheckCircle } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 
@@ -79,10 +80,22 @@ export const ContactForm: React.FC = () => {
   return (
     <section id="contacto" className="py-24 bg-white relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-brand-600 rounded-3xl overflow-hidden shadow-2xl flex flex-col lg:flex-row">
+        <motion.div 
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.6 }}
+          className="bg-brand-600 rounded-3xl overflow-hidden shadow-2xl flex flex-col lg:flex-row"
+        >
           
           {/* Content Side */}
-          <div className="lg:w-1/2 p-12 lg:p-20 text-white flex flex-col justify-center relative">
+          <motion.div 
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="lg:w-1/2 p-12 lg:p-20 text-white flex flex-col justify-center relative"
+          >
              {/* Abstract pattern */}
              <div className="absolute top-0 left-0 w-full h-full opacity-10">
                 <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
@@ -99,7 +112,7 @@ export const ContactForm: React.FC = () => {
               ¿Listo para cambiar tu futuro?
             </h2>
             <p className="text-brand-100 text-lg mb-8 relative z-10">
-              Únete a la academia valorada en $100M+ y accede a las mejores oportunidades del mercado. Solicita información hoy mismo.
+              Únete a la academia online mejor valorada y accede a las mejores oportunidades del mercado. Solicita información hoy mismo.
             </p>
             <ul className="space-y-4 relative z-10">
               {['Asesoría personalizada', 'Acceso al plan de estudios completo', 'Becas disponibles'].map((item, i) => (
@@ -111,10 +124,16 @@ export const ContactForm: React.FC = () => {
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
 
           {/* Form Side */}
-          <div className="lg:w-1/2 bg-white p-12 lg:p-20">
+          <motion.div 
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="lg:w-1/2 bg-white p-12 lg:p-20"
+          >
             {formStatus === 'success' ? (
               <div className="h-full flex flex-col items-center justify-center text-center animate-fade-in-up">
                 <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-6">
@@ -185,8 +204,8 @@ export const ContactForm: React.FC = () => {
                 </button>
               </form>
             )}
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );

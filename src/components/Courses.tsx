@@ -45,7 +45,8 @@ export const Courses: React.FC = () => {
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.6 }}
             className="max-w-2xl mx-auto text-center"
           >
             <h2 className="text-orange-600 font-bold uppercase text-sm tracking-widest mb-4">Catálogo de Expertos</h2>
@@ -74,8 +75,8 @@ export const Courses: React.FC = () => {
               key={index}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
               className="bg-white rounded-[2rem] overflow-hidden border border-slate-100 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group"
             >
               {/* Imagen con Badge de Rating */}

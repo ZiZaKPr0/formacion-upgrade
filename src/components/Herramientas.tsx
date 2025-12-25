@@ -87,7 +87,13 @@ export const Herramientas: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* TÍTULO CENTRADO */}
-        <div className="text-center max-w-3xl mx-auto mb-20">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.6 }}
+          className="text-center max-w-3xl mx-auto mb-20"
+        >
           <h2 className="text-orange-600 font-bold uppercase text-xs tracking-[0.2em] mb-4">
             Metodología Interactiva
           </h2>
@@ -97,27 +103,39 @@ export const Herramientas: React.FC = () => {
           <p className="text-slate-600 text-lg leading-relaxed max-w-2xl mx-auto">
             Integramos las tecnologías más punteras en nuestros programas para asegurar que tu formación esté a la vanguardia del mercado laboral.
           </p>
-        </div>
+        </motion.div>
 
         {/* GRID: Cards (Izq) y Nube (Der) */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           
           {/* Lado Izquierdo: Cards */}
-          <div className="relative h-[400px] w-full flex items-center justify-center lg:justify-end">
+          <motion.div 
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="relative h-[400px] w-full flex items-center justify-center lg:justify-end"
+          >
             <div className="w-full max-w-sm">
               <DisplayCards cards={defaultCards} />
             </div>
-          </div>
+          </motion.div>
 
           {/* Lado Derecho: Nube */}
-          <div className="h-[450px] w-full flex items-center justify-center lg:justify-start">
+          <motion.div 
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="h-[450px] w-full flex items-center justify-center lg:justify-start"
+          >
              <div className="w-full max-w-md bg-slate-50/80 rounded-3xl p-10 border border-slate-100 shadow-inner">
                 <h4 className="text-slate-400 text-xs font-bold uppercase tracking-widest mb-8 text-center lg:text-left">
                   Ecosistema de Software
                 </h4>
                 <IconCloudCustom images={iconImages} />
              </div>
-          </div>
+          </motion.div>
 
         </div>
       </div>
