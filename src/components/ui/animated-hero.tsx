@@ -55,15 +55,14 @@ function Hero() {
             </h1>
 
             <p className="text-lg md:text-xl leading-relaxed tracking-tight text-slate-300 max-w-2xl text-center">
-              Managing a small business today is already tough. Avoid further
-              complications by ditching outdated, tedious trade methods. Our
-              goal is to streamline SMB trade, making it easier and faster than
-              ever.
+            Transformamos el aprendizaje online en oportunidades reales. Formación 24/7 de alta calidad para dominar las herramientas más demandadas por las empresas líderes.
             </p>
           </div>
           <div className="flex flex-row gap-3">
-            <Button size="lg" className="gap-4" variant="outline">
-              Contacta con nosotros <Mail className="w-4 h-4" />
+            <Button asChild size="lg" className="gap-4" variant="outline">
+              <a href="#contacto">
+                Contacta con nosotros <Mail className="w-4 h-4" />
+              </a>
             </Button>
           </div>
         </div>

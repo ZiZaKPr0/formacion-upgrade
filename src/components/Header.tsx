@@ -15,10 +15,12 @@ export const Header: React.FC = () => {
 
   const navLinks = [
     { name: 'Cursos', href: '#cursos' },
-    { name: 'Nosotros', href: '#nosotros' },
-    { name: 'Empresas', href: '#empresas' },
-    { name: 'Mentores', href: '#mentores' },
+    { name: 'Contacto', href: '#contacto' },
   ];
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   return (
     <header
@@ -29,7 +31,18 @@ export const Header: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           {/* Logo */}
-          <div className="flex items-center cursor-pointer group">
+          <div 
+            className="flex items-center cursor-pointer group"
+            onClick={scrollToTop}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                scrollToTop();
+              }
+            }}
+          >
             <div className="w-10 h-10 bg-brand-500 rounded-lg flex items-center justify-center text-white font-bold text-xl mr-2 group-hover:rotate-12 transition-transform duration-300">
               UP
             </div>

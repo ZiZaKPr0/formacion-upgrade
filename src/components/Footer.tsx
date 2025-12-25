@@ -25,9 +25,6 @@ export const Footer: React.FC = () => {
             <h4 className="font-bold text-slate-900 mb-4">Plataforma</h4>
             <ul className="space-y-2 text-sm text-slate-500">
               <li><a href="#" className="hover:text-brand-600 transition-colors">Cursos</a></li>
-              <li><a href="#" className="hover:text-brand-600 transition-colors">Bootcamps</a></li>
-              <li><a href="#" className="hover:text-brand-600 transition-colors">Empresas</a></li>
-              <li><a href="#" className="hover:text-brand-600 transition-colors">Precios</a></li>
             </ul>
           </div>
 
@@ -35,8 +32,6 @@ export const Footer: React.FC = () => {
             <h4 className="font-bold text-slate-900 mb-4">Compañía</h4>
             <ul className="space-y-2 text-sm text-slate-500">
               <li><a href="#" className="hover:text-brand-600 transition-colors">Sobre Nosotros</a></li>
-              <li><a href="#" className="hover:text-brand-600 transition-colors">Carreras</a></li>
-              <li><a href="#" className="hover:text-brand-600 transition-colors">Blog</a></li>
               <li><a href="#" className="hover:text-brand-600 transition-colors">Contacto</a></li>
             </ul>
           </div>
@@ -61,7 +56,7 @@ export const Footer: React.FC = () => {
         </div>
 
         <div className="border-t border-slate-200 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-slate-400">
-          <p>© 2024 Formación Upgrade Inc. Todos los derechos reservados.</p>
+          <p>© 2025 Formación Upgrade Inc. Todos los derechos reservados.</p>
           <div className="flex items-center gap-1 mt-4 md:mt-0">
             <span>Hecho con</span>
             <Heart size={14} className="text-red-500 fill-red-500" />

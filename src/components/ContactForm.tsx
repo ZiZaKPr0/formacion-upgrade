@@ -1,16 +1,79 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Send, CheckCircle } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 
 export const ContactForm: React.FC = () => {
-  const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
+  const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // Configuración de EmailJS
+  // IMPORTANTE: Reemplaza estos valores con tus credenciales de EmailJS
+  // Puedes obtenerlas en: https://www.emailjs.com/
+  const EMAILJS_SERVICE_ID = 'service_pkbmfnm';    // Tu Service ID
+  const EMAILJS_TEMPLATE_ID = 'template_ppas10g';  // Tu Template ID
+  const EMAILJS_PUBLIC_KEY = '2hkTbWgbiBuLgCLUk';    // Tu Public Key
+
+  useEffect(() => {
+    // Inicializar EmailJS con tu Public Key
+    emailjs.init(EMAILJS_PUBLIC_KEY);
+  }, []);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { id, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [id]: value
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setFormStatus('submitting');
-    // Simulate API call
-    setTimeout(() => {
+
+    try {
+      // Validar que las credenciales estén configuradas
+      if (
+        EMAILJS_SERVICE_ID.includes('YOUR_') ||
+        EMAILJS_TEMPLATE_ID.includes('YOUR_') ||
+        EMAILJS_PUBLIC_KEY.includes('YOUR_')
+      ) {
+        throw new Error('Por favor, configura tus credenciales de EmailJS en el código');
+      }
+
+      // Enviar email usando EmailJS
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          message: formData.message,
+          to_name: 'Formación Upgrade', // Nombre del destinatario
+        },
+        EMAILJS_PUBLIC_KEY
+      );
+      
       setFormStatus('success');
-    }, 1500);
+      
+      // Limpiar el formulario después del éxito
+      setFormData({
+        name: '',
+        email: '',
+        message: ''
+      });
+    } catch (error) {
+      console.error('Error al enviar el formulario:', error);
+      setFormStatus('error');
+      
+      // Resetear el estado de error después de 3 segundos
+      setTimeout(() => {
+        setFormStatus('idle');
+      }, 3000);
+    }
   };
 
   return (
@@ -33,13 +96,13 @@ export const ContactForm: React.FC = () => {
              </div>
 
             <h2 className="text-4xl lg:text-5xl font-bold mb-6 relative z-10">
-              ¿Listo para despegar?
+              ¿Listo para cambiar tu futuro?
             </h2>
             <p className="text-brand-100 text-lg mb-8 relative z-10">
               Únete a la academia valorada en $100M+ y accede a las mejores oportunidades del mercado. Solicita información hoy mismo.
             </p>
             <ul className="space-y-4 relative z-10">
-              {['Asesoría personalizada gratuita', 'Acceso al plan de estudios completo', 'Becas disponibles para early adopters'].map((item, i) => (
+              {['Asesoría personalizada', 'Acceso al plan de estudios completo', 'Becas disponibles'].map((item, i) => (
                 <li key={i} className="flex items-center gap-3">
                   <div className="w-6 h-6 rounded-full bg-brand-500 flex items-center justify-center">
                     <CheckCircle size={14} />
@@ -58,7 +121,7 @@ export const ContactForm: React.FC = () => {
                   <CheckCircle className="text-green-600" size={40} />
                 </div>
                 <h3 className="text-2xl font-bold text-slate-900 mb-2">¡Mensaje Enviado!</h3>
-                <p className="text-slate-600">Un asesor de Formación Upgrade te contactará en menos de 24 horas.</p>
+                <p className="text-slate-600">Un asesor de Formación Upgrade te contactará lo antes posible.</p>
                 <button 
                   onClick={() => setFormStatus('idle')}
                   className="mt-8 text-brand-600 font-bold hover:underline"
@@ -73,6 +136,8 @@ export const ContactForm: React.FC = () => {
                   <input 
                     type="text" 
                     id="name" 
+                    value={formData.name}
+                    onChange={handleChange}
                     required
                     className="w-full px-4 py-3 rounded-lg bg-slate-50 border border-slate-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-200 transition-all outline-none"
                     placeholder="Ej. Juan Pérez"
@@ -83,24 +148,32 @@ export const ContactForm: React.FC = () => {
                   <input 
                     type="email" 
                     id="email" 
+                    value={formData.email}
+                    onChange={handleChange}
                     required
                     className="w-full px-4 py-3 rounded-lg bg-slate-50 border border-slate-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-200 transition-all outline-none"
                     placeholder="Ej. juan@empresa.com"
                   />
                 </div>
                 <div>
-                  <label htmlFor="interest" className="block text-sm font-bold text-slate-700 mb-2">Área de Interés</label>
-                  <select 
-                    id="interest"
-                    className="w-full px-4 py-3 rounded-lg bg-slate-50 border border-slate-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-200 transition-all outline-none text-slate-600"
-                  >
-                    <option>Desarrollo Web</option>
-                    <option>Data Science</option>
-                    <option>Marketing Digital</option>
-                    <option>Diseño UX/UI</option>
-                    <option>Empresas / Corporate</option>
-                  </select>
+                  <label htmlFor="message" className="block text-sm font-bold text-slate-700 mb-2">Mensaje</label>
+                  <textarea 
+                    id="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    required
+                    rows={5}
+                    className="w-full px-4 py-3 rounded-lg bg-slate-50 border border-slate-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-200 transition-all outline-none resize-none"
+                    placeholder="Cuéntanos qué necesitas, en qué curso estás interesado o cualquier consulta que tengas..."
+                  />
                 </div>
+                {formStatus === 'error' && (
+                  <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
+                    <p className="text-sm text-red-600">
+                      Error al enviar el mensaje. Por favor, inténtalo de nuevo.
+                    </p>
+                  </div>
+                )}
                 <button 
                   type="submit"
                   disabled={formStatus === 'submitting'}

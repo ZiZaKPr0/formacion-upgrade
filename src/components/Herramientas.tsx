@@ -57,33 +57,33 @@ const IconCloudCustom = ({ images }) => (
   </div>
 );
 
-export const Pruebas: React.FC = () => {
+export const Herramientas: React.FC = () => {
   const defaultCards = [
     {
       icon: <Monitor className="size-4 text-blue-500" />,
       title: "Ofimática Profesional",
       description: "Excel, Word y herramientas Microsoft.",
-      date: "Oficial",
+      date: "Ofimática",
       className: "[grid-area:stack] hover:-translate-y-10 transition-all duration-500 bg-white border border-slate-100 shadow-sm",
     },
     {
       icon: <Globe className="size-4 text-orange-500" />,
       title: "Idiomas Online",
       description: "Inglés profesional nivel A2-C1.",
-      date: "Directo",
+      date: "Idiomas",
       className: "[grid-area:stack] translate-x-12 translate-y-10 hover:-translate-y-1 transition-all duration-500 bg-white border border-slate-100 shadow-sm",
     },
     {
       icon: <ShieldCheck className="size-4 text-emerald-500" />,
-      title: "Licitaciones",
-      description: "Certificados para concursos públicos.",
-      date: "Válido",
+      title: "Inteligencia Artificial",
+      description: "Domina las mejores herramientas",
+      date: "Tecnología",
       className: "[grid-area:stack] translate-x-24 translate-y-20 hover:translate-y-10 transition-all duration-500 bg-white border border-slate-100 shadow-sm",
     },
   ];
 
   return (
-    <section id="pruebas" className="py-24 bg-white relative overflow-hidden">
+    <section id="herramientas" className="py-24 bg-white relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* TÍTULO CENTRADO */}
@@ -125,4 +125,5 @@ export const Pruebas: React.FC = () => {
   );
 };
 
-export default Pruebas;
+export default Herramientas;
+
