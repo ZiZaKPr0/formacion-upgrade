@@ -1,4 +1,6 @@
-/* Estilos adicionales si son necesarios */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* Variables CSS para shadcn/ui */
 :root {

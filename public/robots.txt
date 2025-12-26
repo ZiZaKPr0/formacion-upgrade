@@ -1,0 +1,23 @@
+# robots.txt para Formación Upgrade
+# https://formacionupgrade.com
+
+User-agent: *
+Allow: /
+
+# Bloquear acceso a carpetas de desarrollo y build
+Disallow: /src/
+Disallow: /node_modules/
+Disallow: /.git/
+Disallow: /dist/
+
+# Permitir acceso a recursos estáticos
+Allow: /assets/
+Allow: /images/
+Allow: /favicon.svg
+
+# Sitemap
+Sitemap: https://formacionupgrade.com/sitemap.xml
+
+# Crawl-delay (opcional, ajusta según necesites)
+# Crawl-delay: 1
+

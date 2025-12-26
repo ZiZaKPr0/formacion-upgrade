@@ -18,8 +18,39 @@ export const Header: React.FC = () => {
     { name: 'Contacto', href: '#contacto' },
   ];
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    // Solo manejar enlaces hash (enlaces internos)
+    if (href.startsWith('#')) {
+      e.preventDefault();
+      const targetId = href.slice(1);
+      const targetElement = document.getElementById(targetId);
+      
+      if (targetElement) {
+        // Calcular posición considerando el header fijo
+        const headerOffset = 100;
+        const elementPosition = targetElement.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
+    }
+    // Para enlaces externos, dejar el comportamiento por defecto
+  };
+
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Si hay un hash en la URL (páginas legales), redirigir a la página principal
+    if (window.location.hash) {
+      window.location.hash = '';
+      // Pequeño delay para asegurar que el hash se limpie antes del scroll
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 100);
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   };
 
   return (
@@ -62,6 +93,7 @@ export const Header: React.FC = () => {
               <a
                 key={link.name}
                 href={link.href}
+                onClick={(e) => handleNavClick(e, link.href)}
                 className={`text-sm font-medium transition-colors duration-200 ${
                   isScrolled 
                     ? 'text-slate-900 hover:text-brand-600' 
@@ -100,8 +132,11 @@ export const Header: React.FC = () => {
             <a
               key={link.name}
               href={link.href}
+              onClick={(e) => {
+                handleNavClick(e, link.href);
+                setIsMobileMenuOpen(false);
+              }}
               className="text-lg font-medium text-slate-800 py-2 border-b border-slate-100"
-              onClick={() => setIsMobileMenuOpen(false)}
             >
               {link.name}
             </a>

@@ -25,34 +25,38 @@ const slugs = [
 // Usamos el CDN de Simple Icons con un fallback por si acaso
 const iconImages = slugs.map(slug => `https://cdn.simpleicons.org/${slug}`);
 
-const IconCloudCustom = ({ images }) => (
+const IconCloudCustom = ({ images, slugs }: { images: string[], slugs: string[] }) => (
   <div className="relative flex h-full w-full items-center justify-center">
     <div className="flex flex-wrap justify-center gap-4 max-w-[400px]">
-      {images.map((img, index) => (
-        <motion.div
-          key={index}
-          animate={{ 
-            y: [0, -10, 0], 
-            rotate: [0, index % 2 === 0 ? 5 : -5, 0],
-            opacity: [0.9, 1, 0.9] 
-          }}
-          transition={{
-            duration: 4 + Math.random() * 2,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: index * 0.2,
-          }}
-          className="bg-white p-3 rounded-xl shadow-md border border-slate-100 flex items-center justify-center"
-        >
-          <img 
-            src={img} 
-            alt="icon" 
-            className="size-8 object-contain" 
-            // Si la imagen falla, no mostramos el cuadro roto
-            onError={(e) => { e.currentTarget.parentElement.style.display = 'none'; }} 
-          />
-        </motion.div>
-      ))}
+      {images.map((img, index) => {
+        const slug = slugs[index] || 'herramienta';
+        return (
+          <motion.div
+            key={index}
+            animate={{ 
+              y: [0, -10, 0], 
+              rotate: [0, index % 2 === 0 ? 5 : -5, 0],
+              opacity: [0.9, 1, 0.9] 
+            }}
+            transition={{
+              duration: 4 + Math.random() * 2,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: index * 0.2,
+            }}
+            className="bg-white p-3 rounded-xl shadow-md border border-slate-100 flex items-center justify-center"
+          >
+            <img 
+              src={img} 
+              alt={`Logo ${slug}`}
+              className="size-8 object-contain" 
+              loading="lazy"
+              // Si la imagen falla, no mostramos el cuadro roto
+              onError={(e) => { e.currentTarget.parentElement.style.display = 'none'; }} 
+            />
+          </motion.div>
+        );
+      })}
     </div>
   </div>
 );
@@ -133,7 +137,7 @@ export const Herramientas: React.FC = () => {
                 <h4 className="text-slate-400 text-xs font-bold uppercase tracking-widest mb-8 text-center lg:text-left">
                   Ecosistema de Software
                 </h4>
-                <IconCloudCustom images={iconImages} />
+                <IconCloudCustom images={iconImages} slugs={slugs} />
              </div>
           </motion.div>
 

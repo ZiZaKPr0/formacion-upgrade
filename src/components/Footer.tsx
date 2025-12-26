@@ -24,15 +24,15 @@ export const Footer: React.FC = () => {
           <div>
             <h4 className="font-bold text-slate-900 mb-4">Plataforma</h4>
             <ul className="space-y-2 text-sm text-slate-500">
-              <li><a href="#" className="hover:text-brand-600 transition-colors">Cursos</a></li>
+              <li><a href="#cursos" className="hover:text-brand-600 transition-colors">Cursos</a></li>
             </ul>
           </div>
 
           <div>
             <h4 className="font-bold text-slate-900 mb-4">Compañía</h4>
             <ul className="space-y-2 text-sm text-slate-500">
-              <li><a href="#" className="hover:text-brand-600 transition-colors">Sobre Nosotros</a></li>
-              <li><a href="#" className="hover:text-brand-600 transition-colors">Contacto</a></li>
+              <li><a href="#nosotros" className="hover:text-brand-600 transition-colors">Sobre Nosotros</a></li>
+              <li><a href="#contacto" className="hover:text-brand-600 transition-colors">Contacto</a></li>
             </ul>
           </div>
 
@@ -55,9 +55,22 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
-        <div className="border-t border-slate-200 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-slate-400">
-          <p>© 2025 Formación Upgrade Inc. Todos los derechos reservados.</p>
-          <div className="flex items-center gap-1 mt-4 md:mt-0">
+        <div className="border-t border-slate-200 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-slate-400 gap-4">
+          <div className="flex flex-col md:flex-row items-center gap-4">
+            <p>© 2025 Formación Upgrade Inc. Todos los derechos reservados.</p>
+            <div className="flex items-center gap-4">
+              <a href="#aviso-legal" className="hover:text-brand-600 transition-colors underline">
+                Aviso Legal
+              </a>
+              <a href="#privacidad" className="hover:text-brand-600 transition-colors underline">
+                Privacidad
+              </a>
+              <a href="#cookies" className="hover:text-brand-600 transition-colors underline">
+                Cookies
+              </a>
+            </div>
+          </div>
+          <div className="flex items-center gap-1">
             <span>Hecho con</span>
             <Heart size={14} className="text-red-500 fill-red-500" />
             <span>para el futuro.</span>

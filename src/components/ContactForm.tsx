@@ -10,6 +10,7 @@ export const ContactForm: React.FC = () => {
     email: '',
     message: ''
   });
+  const [privacyAccepted, setPrivacyAccepted] = useState(false);
 
   // Configuración de EmailJS
   // IMPORTANTE: Reemplaza estos valores con tus credenciales de EmailJS
@@ -33,6 +34,16 @@ export const ContactForm: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validar consentimiento de privacidad
+    if (!privacyAccepted) {
+      setFormStatus('error');
+      setTimeout(() => {
+        setFormStatus('idle');
+      }, 3000);
+      return;
+    }
+
     setFormStatus('submitting');
 
     try {
@@ -66,6 +77,7 @@ export const ContactForm: React.FC = () => {
         email: '',
         message: ''
       });
+      setPrivacyAccepted(false);
     } catch (error) {
       console.error('Error al enviar el formulario:', error);
       setFormStatus('error');
@@ -186,16 +198,35 @@ export const ContactForm: React.FC = () => {
                     placeholder="Cuéntanos qué necesitas, en qué curso estás interesado o cualquier consulta que tengas..."
                   />
                 </div>
+                <div className="flex items-start gap-3">
+                  <input
+                    type="checkbox"
+                    id="privacy"
+                    checked={privacyAccepted}
+                    onChange={(e) => setPrivacyAccepted(e.target.checked)}
+                    required
+                    className="mt-1 w-4 h-4 text-brand-600 border-slate-300 rounded focus:ring-brand-500 focus:ring-2"
+                  />
+                  <label htmlFor="privacy" className="text-sm text-slate-600 cursor-pointer">
+                    He leído y acepto la{' '}
+                    <a href="#privacidad" className="text-brand-600 underline hover:text-brand-700">
+                      política de privacidad
+                    </a>
+                    {' '}y el tratamiento de mis datos.
+                  </label>
+                </div>
                 {formStatus === 'error' && (
                   <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
                     <p className="text-sm text-red-600">
-                      Error al enviar el mensaje. Por favor, inténtalo de nuevo.
+                      {!privacyAccepted 
+                        ? 'Debes aceptar la política de privacidad para continuar.'
+                        : 'Error al enviar el mensaje. Por favor, inténtalo de nuevo.'}
                     </p>
                   </div>
                 )}
                 <button 
                   type="submit"
-                  disabled={formStatus === 'submitting'}
+                  disabled={formStatus === 'submitting' || !privacyAccepted}
                   className="w-full bg-slate-900 text-white font-bold py-4 rounded-xl hover:bg-slate-800 transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
                 >
                   {formStatus === 'submitting' ? 'Enviando...' : (
